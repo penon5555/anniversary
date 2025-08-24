@@ -2,7 +2,9 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Happy 2nd Anniversary 💕</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
@@ -20,6 +22,10 @@
             animation: gradient 8s ease infinite;
             min-height: 100vh;
             overflow-x: hidden;
+            /* iPhone 11 optimizations */
+            width: 100vw;
+            max-width: 100%;
+            padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
         }
         
         @keyframes gradient {
@@ -69,16 +75,17 @@
         .main-content {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 60px 40px;
+            border-radius: 25px;
+            padding: 40px 25px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+            width: 90%;
             position: relative;
             z-index: 10;
             transform: translateY(0);
             animation: slideIn 1s ease-out;
+            margin: 20px auto;
         }
         
         @keyframes slideIn {
@@ -93,9 +100,9 @@
         }
         
         .heart-icon {
-            font-size: 80px;
+            font-size: 60px;
             color: #ff6b6b;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: block;
             animation: heartbeat 1.5s ease-in-out infinite;
         }
@@ -108,47 +115,56 @@
         
         h1 {
             color: #333;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: 2em;
+            margin-bottom: 15px;
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
         }
         
         .subtitle {
             color: #666;
-            font-size: 1.2em;
-            margin-bottom: 40px;
+            font-size: 1em;
+            margin-bottom: 25px;
             font-weight: 300;
-            line-height: 1.6;
+            line-height: 1.4;
         }
         
         .love-message {
             color: #444;
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 40px;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 30px;
             font-weight: 400;
         }
         
         .button-container {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
             justify-content: center;
-            flex-wrap: wrap;
+            align-items: center;
         }
         
         .love-btn {
             background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.1em;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 0.95em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
             font-family: 'Kanit', sans-serif;
+            width: 100%;
+            max-width: 280px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         
         .love-btn:hover {
@@ -162,12 +178,13 @@
         }
         
         .hidden-message {
-            margin-top: 30px;
-            padding: 20px;
+            margin-top: 25px;
+            padding: 15px;
             background: linear-gradient(45deg, #ffb3d1, #ffc0cb);
-            border-radius: 20px;
+            border-radius: 15px;
             color: #333;
             font-weight: 500;
+            font-size: 0.9em;
             transform: scale(0);
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             opacity: 0;
@@ -198,8 +215,8 @@
         }
         
         .love-counter {
-            margin-top: 30px;
-            font-size: 1.1em;
+            margin-top: 20px;
+            font-size: 0.95em;
             color: #666;
             font-weight: 500;
         }
@@ -215,10 +232,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            padding: 20px 0;
             transform: translateY(100%);
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             opacity: 0;
+            overflow-y: auto;
         }
         
         .gallery-container.show {
@@ -228,35 +246,36 @@
         
         .gallery-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: white;
+            padding: 0 20px;
         }
         
         .gallery-header h2 {
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 10px;
             color: #ff6b6b;
         }
         
         .gallery-header p {
-            font-size: 1.2em;
+            font-size: 1em;
             color: #ccc;
         }
         
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr;
             gap: 20px;
-            max-width: 1000px;
-            padding: 0 20px;
-            margin-bottom: 40px;
+            max-width: 350px;
+            padding: 0 15px;
+            margin-bottom: 30px;
         }
         
         .photo-frame {
             background: white;
             padding: 15px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transform: scale(0);
             animation: photoAppear 0.6s ease-out forwards;
             position: relative;
@@ -340,12 +359,15 @@
         .upload-area {
             border: 2px dashed #ff6b6b;
             border-radius: 15px;
-            padding: 40px;
+            padding: 30px 20px;
             text-align: center;
             color: #ccc;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
+            max-width: 320px;
+            font-size: 1em;
+            width: 100%;
         }
         
         .upload-area:hover {
@@ -358,22 +380,44 @@
         }
         
         @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
             .main-content {
-                padding: 40px 20px;
-                margin: 20px;
+                padding: 30px 20px;
+                margin: 15px;
+                max-width: 100%;
+                width: calc(100% - 30px);
             }
             
             h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
             
             .heart-icon {
-                font-size: 60px;
+                font-size: 50px;
             }
             
-            .button-container {
-                flex-direction: column;
-                align-items: center;
+            .love-message {
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+            
+            .love-btn {
+                font-size: 0.9em;
+                padding: 10px 20px;
+                max-width: 100%;
+            }
+            
+            .photo-grid {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+            
+            .upload-area {
+                max-width: 100%;
+                padding: 20px 10px;
             }
         }
     </style>
@@ -572,7 +616,7 @@
                     photoFrame.style.animationDelay = (uploadedPhotos.length * 0.1) + 's';
                     
                     photoFrame.innerHTML = `
-                        <img src="${e.target.result}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                        <img src="${e.target.result}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
                         <div class="photo-caption">รูปที่ ${uploadedPhotos.length + 1}</div>
                     `;
                     
