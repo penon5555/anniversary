@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 2nd Anniversary 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(-45deg, #ff6b6b, #ff8e8e, #ffa8a8, #ffb3d1);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart-float {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            transform: translateY(0);
+            animation: slideIn 1s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .heart-icon {
+            font-size: 80px;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            display: block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .love-message {
+            color: #444;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .love-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            font-family: 'Kanit', sans-serif;
+        }
+        
+        .love-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(45deg, #ff5252, #ff6b6b);
+        }
+        
+        .love-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .hidden-message {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(45deg, #ffb3d1, #ffc0cb);
+            border-radius: 20px;
+            color: #333;
+            font-weight: 500;
+            transform: scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+        }
+        
+        .hidden-message.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 20px;
+            pointer-events: none;
+            animation: sparkle 1s ease-out forwards;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 0;
+            }
+        }
+        
+        .love-counter {
+            margin-top: 30px;
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .gallery-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(100%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+        }
+        
+        .gallery-container.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .gallery-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+        
+        .gallery-header p {
+            font-size: 1.2em;
+            color: #ccc;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+        
+        .photo-frame {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(0);
+            animation: photoAppear 0.6s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-frame:nth-child(1) { animation-delay: 0.1s; }
+        .photo-frame:nth-child(2) { animation-delay: 0.2s; }
+        .photo-frame:nth-child(3) { animation-delay: 0.3s; }
+        .photo-frame:nth-child(4) { animation-delay: 0.4s; }
+        .photo-frame:nth-child(5) { animation-delay: 0.5s; }
+        .photo-frame:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes photoAppear {
+            from {
+                transform: scale(0) rotate(-10deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffa8a8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .photo-caption {
+            text-align: center;
+            color: #333;
+            font-weight: 500;
+            font-size: 1em;
+        }
+        
+        .close-gallery {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Kanit', sans-serif;
+        }
+        
+        .close-gallery:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+        
+        .upload-area {
+            border: 2px dashed #ff6b6b;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: #ff8e8e;
+            background: rgba(255, 107, 107, 0.1);
+        }
+        
+        .upload-area input[type="file"] {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .heart-icon {
+                font-size: 60px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg"></div>
+    
+    <div class="container">
+        <div class="main-content">
+            <span class="heart-icon">💖</span>
+            <h1>Happy 2nd Anniversary</h1>
+            <p class="subtitle">ครบรอบ 2 ปีแห่งความรักของเรา</p>
+            
+            <div class="love-message">
+                2 ปีที่ผ่านมาเป็นช่วงเวลาที่สวยงามที่สุด<br>
+                ขอบคุณสำหรับทุกความทรงจำดีๆ ที่เราสร้างด้วยกัน<br>
+                ทุกวันที่ได้อยู่ข้างๆ เธอคือของขวัญที่ดีที่สุด<br><br>
+                <strong>Happy Anniversary Baby! รักเธอมากกว่าเดิมทุกวัน 💕</strong>
+            </div>
+            
+            <div class="button-container">
+                <button class="love-btn" onclick="showLove()">Happy Anniversary my love! 💝</button>
+                <button class="love-btn" onclick="moreMessage()">ความทรงจำดีๆ ของเรา ✨</button>
+                <button class="love-btn" onclick="showGallery()">รูปภาพของเรา 📸</button>
+            </div>
+            
+            <div id="hiddenMessage" class="hidden-message"></div>
+            <div id="loveCounter" class="love-counter"></div>
+        </div>
+    </div>
+    
+    <!-- Gallery Page -->
+    <div id="galleryContainer" class="gallery-container">
+        <div class="gallery-header">
+            <h2>💕 Our Memories 💕</h2>
+            <p>ความทรงจำดีๆ ของเรา 2 ปีที่ผ่านมา</p>
+        </div>
+        
+        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFileUpload(event)">
+            <div>
+                <span style="font-size: 2em;">📸</span><br>
+                คลิกที่นี่เพื่ออัพโหลดรูปภาพของเรา<br>
+                <small>(รองรับหลายไฟล์พร้อมกัน)</small>
+            </div>
+        </div>
+        
+        <div class="photo-grid" id="photoGrid">
+            <!-- รูปตัวอย่าง -->
+            <div class="photo-frame">
+                <div class="photo-placeholder">📷</div>
+                <div class="photo-caption">วันแรกที่เจอกัน</div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">💑</div>
+                <div class="photo-caption">วันเดทครั้งแรก</div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">🎂</div>
+                <div class="photo-caption">วันเกิดที่ผ่านมา</div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">🌅</div>
+                <div class="photo-caption">ทริปสุดโรแมนติก</div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">🎉</div>
+                <div class="photo-caption">ครบรอบปีที่ 1</div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">❤️</div>
+                <div class="photo-caption">ตอนนี้ - ครบรอบ 2 ปี</div>
+            </div>
+        </div>
+        
+        <button class="close-gallery" onclick="closeGallery()">กลับไปหน้าหลัก 💖</button>
+    </div>
+
+    <script>
+        let loveCount = 0;
+        let uploadedPhotos = [];
+        const messages = [
+            "2 ปีที่ผ่านมาเต็มไปด้วยความสุขที่เราสร้างด้วยกัน 🌟",
+            "จำได้ไหมวันแรกที่เราเจอกัน หัวใจเต้นแรงมาก 💓",
+            "ขอบคุณที่ทำให้ทุกวันของฉันมีความหมาย 🌈",
+            "2 ปีผ่านไปแต่ความรักยิ่งแรงขึ้นทุกวัน 💑",
+            "เธอคือสิ่งดีที่สุดที่เกิดขึ้นในชีวิตฉัน ✨",
+            "ไปด้วยกันต่ไปอีกหลายๆ ปีนะ รักเธอ 🌊"
+        ];
+        
+        function createFloatingHearts() {
+            const heartsContainer = document.querySelector('.hearts-bg');
+            const heartSymbols = ['💖', '💕', '💗', '💓', '💝', '🌹'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }, 800);
+        }
+        
+        function createSparkles(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.innerHTML = '✨';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                sparkle.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        }
+        
+        function showLove() {
+            loveCount++;
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            const loveCounter = document.getElementById('loveCounter');
+            
+            hiddenMessage.innerHTML = `
+                <h3>💕 Happy 2nd Anniversary! 💕</h3>
+                <p>2 ปีแห่งความรักที่สวยงาม<br>
+                ขอให้เราได้รักกันไปอีกนานๆ นะ 💖</p>
+            `;
+            hiddenMessage.classList.add('show');
+            
+            loveCounter.innerHTML = `ครบรอบวันที่ ${loveCount} แล้วด้วยกัน 💝`;
+            
+            // สร้างเอฟเฟกต์ sparkles
+            createSparkles(window.innerWidth / 2, window.innerHeight / 2);
+        }
+        
+        function moreMessage() {
+            const hiddenMessage = document.getElementById('hiddenMessage');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            hiddenMessage.innerHTML = `
+                <h3>💌 ความทรงจำดีๆ</h3>
+                <p>${randomMessage}</p>
+            `;
+            hiddenMessage.classList.add('show');
+            
+            // สร้าง sparkles แบบสุ่ม
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    createSparkles(
+                        Math.random() * window.innerWidth,
+                        Math.random() * window.innerHeight
+                    );
+                }, i * 200);
+            }
+        }
+        
+        function showGallery() {
+            const gallery = document.getElementById('galleryContainer');
+            gallery.classList.add('show');
+            
+            // สร้าง sparkles เมื่อเปิด gallery
+            createSparkles(window.innerWidth / 2, window.innerHeight / 2);
+        }
+        
+        function closeGallery() {
+            const gallery = document.getElementById('galleryContainer');
+            gallery.classList.remove('show');
+        }
+        
+        function handleFileUpload(event) {
+            const files = event.target.files;
+            const photoGrid = document.getElementById('photoGrid');
+            
+            // ลบรูปตัวอย่างออกเมื่อมีการอัพโหลดครั้งแรก
+            if (uploadedPhotos.length === 0) {
+                photoGrid.innerHTML = '';
+            }
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const photoFrame = document.createElement('div');
+                    photoFrame.className = 'photo-frame';
+                    photoFrame.style.animationDelay = (uploadedPhotos.length * 0.1) + 's';
+                    
+                    photoFrame.innerHTML = `
+                        <img src="${e.target.result}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                        <div class="photo-caption">รูปที่ ${uploadedPhotos.length + 1}</div>
+                    `;
+                    
+                    photoGrid.appendChild(photoFrame);
+                    uploadedPhotos.push(e.target.result);
+                    
+                    // เอฟเฟกต์เมื่ออัพโหลดสำเร็จ
+                    createSparkles(
+                        Math.random() * window.innerWidth,
+                        Math.random() * window.innerHeight
+                    );
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // เริ่มต้น floating hearts
+        createFloatingHearts();
+        
+        // เพิ่มเอฟเฟกต์คลิก
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('love-btn')) {
+                createSparkles(e.clientX, e.clientY);
+            }
+        });
+        
+        // ปิด gallery เมื่อกด ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeGallery();
+            }
+        });
+    </script>
+</body>
+</html>
