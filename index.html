@@ -379,6 +379,152 @@
             display: none;
         }
         
+        /* Letter Page Styles */
+        .letter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(100%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+            padding: 20px;
+        }
+        
+        .letter-container.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .envelope {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            border-radius: 10px 10px 0 0;
+            transform-origin: bottom;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-bottom: 2px solid #ddd;
+            z-index: 2;
+        }
+        
+        .envelope.opened .envelope-front {
+            transform: rotateX(180deg);
+        }
+        
+        .letter {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: #fefefe;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+        
+        .envelope.opened .letter {
+            transform: translateY(-50px) scale(1.1);
+            opacity: 1;
+            z-index: 3;
+        }
+        
+        .letter-content {
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Kanit', sans-serif;
+        }
+        
+        .letter-title {
+            font-size: 1.5em;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .letter-text {
+            font-size: 0.9em;
+            color: #444;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        .envelope-instruction {
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .close-letter {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Kanit', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+        
+        .close-letter:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .envelope-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #ff6b6b;
+            z-index: 1;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -447,9 +593,10 @@
             </div>
             
             <div class="button-container">
-                <button class="love-btn" onclick="showLove()">Happy Anniversary my love! 💝</button>
-                <button class="love-btn" onclick="moreMessage()">ความทรงจำดีๆ ของเรา ✨</button>
+                <button class="love-btn" onclick="showLove()">ปุ่มบอกรักกกกกก 💝</button>
+                <button class="love-btn" onclick="moreMessage()">ลองงกดดดดู ✨</button>
                 <button class="love-btn" onclick="showGallery()">รูปภาพของเรา 📸</button>
+                <button class="love-btn" onclick="showLetter()">จดหมายรัก 💌</button>
             </div>
             
             <div id="hiddenMessage" class="hidden-message"></div>
@@ -476,60 +623,103 @@
         <div class="photo-grid" id="photoGrid">
             <!-- รูปภาพของเรา -->
             <div class="photo-frame">
-                <img src="./pic_2.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                <div class="photo-caption">วันแรกที่เจอกัน ❤️</div>
+                <img src="./first_time.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">วันแรกที่เจอกันนน ❤️</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                <div class="photo-caption">วันเดทครั้งแรก 💕</div>
+                <img src="./pair9.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption"> 💕</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <img src="./bdaum.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
                 <div class="photo-caption">วันเกิดที่ผ่านมา 🎂</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                <div class="photo-caption">ทริปสุดโรแมนติก 🌅</div>
+                <img src="./2sec.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption"> 🌅</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <img src="./1styear.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
                 <div class="photo-caption">ครบรอบปีที่ 1 🎉</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                <div class="photo-caption">ตอนนี้ - ครบรอบ 2 ปี ❤️</div>
+                <img src="./pair1.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">แว่นแว่นนนน 💖</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                <div class="photo-caption">ช่วงเวลาหวานๆ 💖</div>
+                <img src="./pair2.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">อิอิอิอิ 😊</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                <div class="photo-caption">วันที่เราหัวเราะด้วยกัน 😊</div>
+                <img src="./pair3.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">เอานิ้วลงงงง 🌸</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1521543944701-72bd0dc94efa?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                <div class="photo-caption">ความทรงจำสวยๆ 🌸</div>
+                <img src="./pair4.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">หอมหน่อยยย 💫</div>
             </div>
             <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=250&fit=crop&sat=-20" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <img src="./pair5.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">วิ่งๆๆๆกานนน💫</div>
+            </div>
+            <div class="photo-frame">
+                <img src="./pair10.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">ส่งวอนอพอทำงานง่ะ 💫</div>
+            </div>
+            <div class="photo-frame">
+                <img src="./pair6.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">💫</div>
+            </div>
+            <div class="photo-frame">
+                <img src="./pair4.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
                 <div class="photo-caption">อนาคตที่สวยงาม 💫</div>
             </div>
         </div>
         
         <button class="close-gallery" onclick="closeGallery()">กลับไปหน้าหลัก 💖</button>
     </div>
+    
+    <!-- Letter Page -->
+    <div id="letterContainer" class="letter-container">
+        <div class="envelope-instruction">
+            <p>💌 คลิกที่จดหมายเพื่อเปิดอ่าน 💌</p>
+        </div>
+        
+        <div class="envelope" id="envelope" onclick="openLetter()">
+            <div class="envelope-back"></div>
+            <div class="envelope-front"></div>
+            <div class="envelope-icon">💝</div>
+            <div class="letter">
+                <div class="letter-content">
+                    <div class="letter-title">ถึงคนที่เค้ารักมากกกกที่สุด</div>
+                    <div class="letter-text">
+                        2 ปีที่ผ่านมา...<br><br>
+                        
+                        เป็น 730 วันที่สวยงามที่สุดในชีวิตเค้า เป็น 17,520 ชั่วโมงที่เต็มไปด้วยความสุขมากๆๆๆๆๆ<br>เป็น 1,051,200 นาทีที่เค้าได้รักเธอละจะเพิ่มไปเรื่อยๆๆๆเลยนะ<br><br>
+                        ขอบคุณที่เป็นแสงสว่างในวันมืด<br>
+                        ขอบคุณที่เป็นเหตุผลของรอยยิ้ม<br>
+                        ขอบคุณที่ให้ฉันได้เป็นคนที่ดีขึ้น<br><br>
+                        
+                        <strong>Happy 2nd Anniversary<br>
+                        รักเธอมากที่สุดในโลก ❤️</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="close-letter" onclick="closeLetter()">กลับไปหน้าหลัก 💖</button>
+    </div>
 
     <script>
         let loveCount = 0;
         let uploadedPhotos = [];
         const messages = [
-            "2 ปีที่ผ่านมาเต็มไปด้วยความสุขที่เราสร้างด้วยกัน 🌟",
-            "จำได้ไหมวันแรกที่เราเจอกัน หัวใจเต้นแรงมาก 💓",
-            "ขอบคุณที่ทำให้ทุกวันของฉันมีความหมาย 🌈",
-            "2 ปีผ่านไปแต่ความรักยิ่งแรงขึ้นทุกวัน 💑",
-            "เธอคือสิ่งดีที่สุดที่เกิดขึ้นในชีวิตฉัน ✨",
-            "ไปด้วยกันต่ไปอีกหลายๆ ปีนะ รักเธอ 🌊"
+            "2 ปีที่ผ่านมาเต็มไปด้วยความสุขที่เราสร้างด้วยกันนนนนนะที่รัก 🌟",
+            "วันแรกที่เค้าเจอเธอหัวใจเค้าเต้นแรงมากกกก 💓",
+            "ขอบคุณที่ทำให้ทุกวันของเค้ามีความหมายนะที่รัก 🌈",
+            "2 ปีผ่านไปแต่ความรักของเค้ายิ่งมากขึ้นทุกวันเรยยย 💑",
+            "เธอคือสิ่งดีที่สุดที่เกิดขึ้นในชีวิตเค้านะ ✨",
+            "อยู่ด้วยยยยกันไปอีกหลายๆๆๆๆปีเรยนะ รักเธอมากๆๆๆๆๆๆนะะะะะะวอนอพอออ 🌊"
         ];
         
         function createFloatingHearts() {
@@ -581,7 +771,7 @@
             `;
             hiddenMessage.classList.add('show');
             
-            loveCounter.innerHTML = `ครบรอบวันที่ ${loveCount} แล้วด้วยกัน 💝`;
+            loveCounter.innerHTML = `บอกรักครั้งงงที่ ${loveCount} 💝`;
             
             // สร้างเอฟเฟกต์ sparkles
             createSparkles(window.innerWidth / 2, window.innerHeight / 2);
@@ -592,7 +782,7 @@
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             
             hiddenMessage.innerHTML = `
-                <h3>💌 ความทรงจำดีๆ</h3>
+                <h3>💌 รักวอนอพอออมากๆๆๆนะะะ</h3>
                 <p>${randomMessage}</p>
             `;
             hiddenMessage.classList.add('show');
@@ -621,6 +811,33 @@
             gallery.classList.remove('show');
         }
         
+        function showLetter() {
+            const letterContainer = document.getElementById('letterContainer');
+            letterContainer.classList.add('show');
+            
+            // รีเซ็ตซองจดหมายให้ปิด
+            const envelope = document.getElementById('envelope');
+            envelope.classList.remove('opened');
+            
+            // สร้าง sparkles เมื่อเปิด letter
+            createSparkles(window.innerWidth / 2, window.innerHeight / 2);
+        }
+        
+        function closeLetter() {
+            const letterContainer = document.getElementById('letterContainer');
+            letterContainer.classList.remove('show');
+        }
+        
+        function openLetter() {
+            const envelope = document.getElementById('envelope');
+            envelope.classList.add('opened');
+            
+            // เอฟเฟกต์เมื่อเปิดจดหมาย
+            setTimeout(() => {
+                createSparkles(window.innerWidth / 2, window.innerHeight / 2);
+            }, 400);
+        }
+        
         function handleFileUpload(event) {
             // ฟังก์ชันนี้ไม่ใช้แล้ว เนื่องจากเปลี่ยนเป็นแสดงรูปจริงแล้ว
         }
@@ -639,6 +856,7 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeGallery();
+                closeLetter();
             }
         });
     </script>
