@@ -412,7 +412,15 @@
             
             .photo-grid {
                 max-width: 100%;
-                padding: 0 10px;
+                padding: 0 20px;
+            }
+            
+            .photo-frame {
+                padding: 12px;
+            }
+            
+            .photo-placeholder {
+                height: 220px;
             }
             
             .upload-area {
@@ -456,7 +464,7 @@
             <p>ความทรงจำดีๆ ของเรา 2 ปีที่ผ่านมา</p>
         </div>
         
-        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-area" style="display: none;">
             <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFileUpload(event)">
             <div>
                 <span style="font-size: 2em;">📸</span><br>
@@ -466,30 +474,46 @@
         </div>
         
         <div class="photo-grid" id="photoGrid">
-            <!-- รูปตัวอย่าง -->
+            <!-- รูปภาพของเรา -->
             <div class="photo-frame">
-                <div class="photo-placeholder">📷</div>
-                <div class="photo-caption">วันแรกที่เจอกัน</div>
+                <img src="/pic_2.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">วันแรกที่เจอกัน ❤️</div>
             </div>
             <div class="photo-frame">
-                <div class="photo-placeholder">💑</div>
-                <div class="photo-caption">วันเดทครั้งแรก</div>
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">วันเดทครั้งแรก 💕</div>
             </div>
             <div class="photo-frame">
-                <div class="photo-placeholder">🎂</div>
-                <div class="photo-caption">วันเกิดที่ผ่านมา</div>
+                <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">วันเกิดที่ผ่านมา 🎂</div>
             </div>
             <div class="photo-frame">
-                <div class="photo-placeholder">🌅</div>
-                <div class="photo-caption">ทริปสุดโรแมนติก</div>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">ทริปสุดโรแมนติก 🌅</div>
             </div>
             <div class="photo-frame">
-                <div class="photo-placeholder">🎉</div>
-                <div class="photo-caption">ครบรอบปีที่ 1</div>
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">ครบรอบปีที่ 1 🎉</div>
             </div>
             <div class="photo-frame">
-                <div class="photo-placeholder">❤️</div>
-                <div class="photo-caption">ตอนนี้ - ครบรอบ 2 ปี</div>
+                <img src="https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">ตอนนี้ - ครบรอบ 2 ปี ❤️</div>
+            </div>
+            <div class="photo-frame">
+                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">ช่วงเวลาหวานๆ 💖</div>
+            </div>
+            <div class="photo-frame">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">วันที่เราหัวเราะด้วยกัน 😊</div>
+            </div>
+            <div class="photo-frame">
+                <img src="https://images.unsplash.com/photo-1521543944701-72bd0dc94efa?w=400&h=250&fit=crop" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">ความทรงจำสวยๆ 🌸</div>
+            </div>
+            <div class="photo-frame">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=250&fit=crop&sat=-20" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
+                <div class="photo-caption">อนาคตที่สวยงาม 💫</div>
             </div>
         </div>
         
@@ -598,40 +622,7 @@
         }
         
         function handleFileUpload(event) {
-            const files = event.target.files;
-            const photoGrid = document.getElementById('photoGrid');
-            
-            // ลบรูปตัวอย่างออกเมื่อมีการอัพโหลดครั้งแรก
-            if (uploadedPhotos.length === 0) {
-                photoGrid.innerHTML = '';
-            }
-            
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    const photoFrame = document.createElement('div');
-                    photoFrame.className = 'photo-frame';
-                    photoFrame.style.animationDelay = (uploadedPhotos.length * 0.1) + 's';
-                    
-                    photoFrame.innerHTML = `
-                        <img src="${e.target.result}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;">
-                        <div class="photo-caption">รูปที่ ${uploadedPhotos.length + 1}</div>
-                    `;
-                    
-                    photoGrid.appendChild(photoFrame);
-                    uploadedPhotos.push(e.target.result);
-                    
-                    // เอฟเฟกต์เมื่ออัพโหลดสำเร็จ
-                    createSparkles(
-                        Math.random() * window.innerWidth,
-                        Math.random() * window.innerHeight
-                    );
-                };
-                
-                reader.readAsDataURL(file);
-            }
+            // ฟังก์ชันนี้ไม่ใช้แล้ว เนื่องจากเปลี่ยนเป็นแสดงรูปจริงแล้ว
         }
         
         // เริ่มต้น floating hearts
